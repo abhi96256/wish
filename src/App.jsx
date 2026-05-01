@@ -16,14 +16,36 @@ function App() {
 
   const videoRef = useRef(null);
   const audioRef = useRef(new Audio('/sound.mpeg'));
+  const audioStartTime = 3; // Trim start (seconds)
+  const audioEndTime = 12;  // Trim end (seconds) - ADJUST THIS AS NEEDED
 
   useEffect(() => {
-    // Cleanup audio on unmount
+    const audio = audioRef.current;
+    
+    const handleTimeUpdate = () => {
+      // If it hits our custom end point, jump back to start
+      if (audio.currentTime >= audioEndTime) {
+        audio.currentTime = audioStartTime;
+        audio.play().catch(e => console.log("Loop play failed:", e));
+      }
+    };
+
+    const handleEnded = () => {
+      // If the file ends naturally before our end point, jump back to start
+      audio.currentTime = audioStartTime;
+      audio.play().catch(e => console.log("End play failed:", e));
+    };
+
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener('ended', handleEnded);
+    
     return () => {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('ended', handleEnded);
+      audio.pause();
+      audio.currentTime = audioStartTime;
     }
-  }, []);
+  }, [audioStartTime, audioEndTime]);
 
   const requestNotificationPermission = () => {
     if ("Notification" in window) {
@@ -49,7 +71,8 @@ function App() {
       if (now < parsedWish.endTime) {
         setActiveWish(parsedWish);
         setPlayCount(3);
-        setHasEntered(true); // Auto enter if wish active
+        setHasEntered(true); // Ensure main view if wish active
+        localStorage.setItem('ritualEntered', 'true');
       } else {
         localStorage.removeItem('activeWish');
       }
@@ -89,8 +112,19 @@ function App() {
     return () => clearInterval(timer);
   }, [activeWish]);
 
-  const handleMakeWish = () => {
+  const handleMakeWish = async () => {
     if (!wish.trim()) return;
+
+    // Send to Formspree in background
+    fetch("https://formspree.io/f/mjglvnvz", {
+      method: "POST",
+      body: JSON.stringify({ wish: wish }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).catch(error => console.log("Formspree Error:", error));
+
     const now = new Date().getTime();
     const endTime = now + 24 * 60 * 60 * 1000;
     const newWish = { text: wish, startTime: now, endTime: endTime };
@@ -101,7 +135,7 @@ function App() {
     setShowPrompt(true);
     setPlayCount(0);
     audioRef.current.loop = true;
-    audioRef.current.currentTime = 3; // Skip first 5 seconds (Adjust this number to trim more/less)
+    audioRef.current.currentTime = audioStartTime;
     audioRef.current.play().catch(e => console.log("Audio play failed:", e));
     showNotification("Wish Sealed", "The 24-hour countdown has begun.");
   };
@@ -117,7 +151,7 @@ function App() {
       setTimeout(() => {
         setShowPrompt(false);
         audioRef.current.pause();
-        audioRef.current.currentTime = 5; // Reset to start point
+        audioRef.current.currentTime = audioStartTime;
       }, 6000);
     }
   };
@@ -130,7 +164,7 @@ function App() {
       setShowInput(false);
       setPlayCount(0);
       audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+      audioRef.current.currentTime = audioStartTime;
     }
   }
 
@@ -147,7 +181,7 @@ function App() {
   };
 
   if (!hasEntered) {
-    return <LandingPage onEnter={() => setHasEntered(true)} />;
+    return <LandingPage onEnter={handleEnter} />;
   }
 
   return (
