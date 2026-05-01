@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Orbitron:wght@400;900&family=Outfit:wght@300;400;600;800&display=swap');
+
+:root {
+  --bg-color: #000000;
+  --text-primary: #ffffff;
+  --text-secondary: #888888;
+  --accent-glow: rgba(255, 255, 255, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 15px;
+  font-weight: 900;
+  font-size: 5rem;
+}

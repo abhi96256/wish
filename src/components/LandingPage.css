@@ -1,0 +1,367 @@
+.bg-scan-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+.landing-wrapper {
+  background-color: #000;
+  color: #f1dedc;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.vignette-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, transparent 20%, rgba(26, 17, 16, 0.95) 80%, #000 100%);
+  z-index: 40;
+  pointer-events: none;
+}
+
+.blood-stain {
+  position: fixed;
+  background: #bc0000;
+  opacity: 0.1;
+  filter: blur(100px);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.blood-stain.top-left {
+  top: 0;
+  left: 0;
+  width: 256px;
+  height: 256px;
+  transform: translate(-50%, -50%);
+}
+
+.blood-stain.bottom-right {
+  bottom: 0;
+  right: 0;
+  width: 384px;
+  height: 384px;
+  transform: translate(25%, 25%);
+}
+
+.ritual-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  background: rgba(12, 10, 9, 0.95);
+  border-bottom: 3px double rgba(65, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 24px;
+  backdrop-filter: blur(4px);
+}
+
+.ritual-logo {
+  font-family: 'Creepster', cursive;
+  font-size: 1.5rem;
+  color: #8b0000;
+  letter-spacing: 0.1em;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-offer-btn {
+  background: #bc0000;
+  color: #fff;
+  border: 1px solid #ff4d4d;
+  padding: 5px 15px;
+  font-family: 'Newsreader', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-offer-btn:hover {
+  background: #8b0000;
+  box-shadow: 0 0 10px #ff0000;
+}
+
+.landing-main {
+  position: relative;
+  z-index: 10;
+  padding-top: 128px;
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-section {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+.title {
+  font-family: 'Newsreader', serif;
+  font-size: clamp(32px, 8vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  color: #ffb4a8;
+  text-transform: uppercase;
+}
+
+.ritual-image-frame {
+  position: relative;
+  max-width: 42rem;
+  width: 100%;
+  margin: 48px auto;
+  aspect-ratio: 16 / 9;
+  border: 4px solid #1c1917;
+  overflow: hidden;
+}
+
+.ritual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.5) brightness(0.75);
+  transition: transform 5s linear;
+}
+
+.ritual-image-frame:hover .ritual-img {
+  transform: scale(1.1);
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(188, 0, 0, 0.2);
+  mix-blend-mode: overlay;
+}
+
+.cross-mark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 200px;
+  color: rgba(139, 0, 0, 0.3);
+  pointer-events: none;
+  user-select: none;
+}
+
+.warning-box {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #2d0000;
+  padding: 32px;
+  position: relative;
+  margin-top: 48px;
+}
+
+.warning-text {
+  font-size: 0.85rem;
+  color: #8b0000;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.fun-disclaimer {
+  color: #ffb4a8;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.covenant-section {
+  margin-top: 96px;
+  max-width: 32rem;
+  width: 100%;
+}
+
+.section-title {
+  font-family: 'Newsreader', serif;
+  font-size: 1.5rem;
+  color: #ffb4a8;
+  border-bottom: 1px solid rgba(65, 0, 0, 0.4);
+  padding-bottom: 16px;
+  margin-bottom: 32px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.rules-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.rules-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.rules-list .icon {
+  color: #8b0000;
+  margin-top: 4px;
+}
+
+.rules-list .rule-text {
+  border-left: 1px solid rgba(139, 0, 0, 0.2);
+  padding-left: 16px;
+}
+
+.cta-container {
+  margin-top: 96px;
+}
+
+.offer-btn {
+  position: relative;
+  padding: 24px 64px;
+  background: #bc0000;
+  color: #fff;
+  border: 2px solid #ff4d4d;
+  font-family: 'Newsreader', serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.offer-btn .btn-hover {
+  display: none;
+}
+
+.offer-btn:hover {
+  background: #8b0000;
+}
+
+.offer-btn:hover .btn-normal {
+  display: none;
+}
+
+.offer-btn:hover .btn-hover {
+  display: block;
+  color: #ffdad4;
+}
+
+.landing-footer {
+  position: relative;
+  z-index: 10;
+  background: #000;
+  color: #2d0000;
+  padding: 80px 48px;
+  border-top: 1px solid rgba(65, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+}
+
+.footer-note {
+  animation: pulse 2s infinite;
+}
+
+@media (max-width: 768px) {
+  .ritual-nav {
+    padding: 10px 15px;
+  }
+
+  .ritual-logo {
+    font-size: 1.1rem;
+  }
+
+  .nav-offer-btn {
+    padding: 4px 10px;
+    font-size: 0.65rem;
+  }
+
+  .landing-main {
+    padding-top: 100px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+  }
+
+  .ritual-image-frame {
+    margin: 32px 0;
+    border-width: 2px;
+  }
+
+  .cross-mark {
+    font-size: 100px;
+  }
+
+  .warning-box {
+    padding: 20px;
+    margin-top: 32px;
+  }
+
+  .warning-text {
+    font-size: 0.75rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+  }
+
+  .rules-list {
+    gap: 16px;
+  }
+
+  .rules-list .rule-text {
+    font-size: 0.85rem;
+  }
+
+  .offer-btn {
+    padding: 18px 40px;
+    font-size: 1.2rem;
+    width: 100%;
+  }
+
+  .landing-footer {
+    padding: 60px 20px;
+    font-size: 8px;
+    gap: 32px;
+  }
+
+  .footer-links {
+    gap: 16px;
+  }
+}

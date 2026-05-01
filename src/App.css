@@ -1,0 +1,510 @@
+.app-wrapper {
+  height: 100vh;
+  background: radial-gradient(circle, #1a0000 0%, #000000 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  animation: shake 10s infinite;
+}
+
+.bg-layers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.lightning-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  opacity: 0.3;
+}
+
+@keyframes shake {
+
+  0%,
+  90%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  91% {
+    transform: translate(-2px, 1px);
+  }
+
+  92% {
+    transform: translate(2px, -1px);
+  }
+
+  93% {
+    transform: translate(-1px, -2px);
+  }
+
+  94% {
+    transform: translate(1px, 2px);
+  }
+}
+
+/* Ghostly Figure in background */
+.app-wrapper::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  transform: translate(-50%, -50%);
+  background: url('https://png.pngtree.com/png-vector/20231017/ourmid/pngtree-scary-ghost-face-mask-png-image_10207856.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  animation: ghost-appear 20s infinite;
+}
+
+@keyframes ghost-appear {
+
+  0%,
+  45%,
+  55%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.03;
+    filter: blur(5px);
+  }
+}
+
+/* Blood Drip Overlay */
+.blood-drip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/puddles.png');
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 10;
+  filter: invert(15%) sepia(95%) saturate(7000%) hue-rotate(0deg) brightness(90%) contrast(100%);
+}
+
+.header {
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.brand {
+  font-family: 'Creepster', cursive;
+  font-size: 1.5rem;
+  color: #8b0000;
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 5px #000;
+  animation: blood-pulse 2s infinite;
+}
+
+@keyframes blood-pulse {
+
+  0%,
+  100% {
+    color: #ffffff;
+    text-shadow: 0 0 5px #ff0000;
+  }
+
+  50% {
+    color: #cccccc;
+    text-shadow: 0 0 20px #ff0000;
+  }
+}
+
+.timer-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 15;
+}
+
+.circular-timer {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 50px rgba(139, 0, 0, 0.5);
+  position: relative;
+}
+
+.timer-text {
+  font-family: 'Nosifer', cursive;
+  font-size: 2.2rem;
+  color: #fff;
+  text-shadow: 0 0 10px #ff0000;
+  z-index: 30;
+}
+
+.wish-input-container {
+  z-index: 20;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.wish-input {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #440000;
+  color: #ff4d4d;
+  padding: 15px;
+  width: 80%;
+  font-family: 'Nosifer', cursive;
+  font-size: 1.1rem;
+  text-align: center;
+  outline: none;
+  letter-spacing: 2px;
+}
+
+.input-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.ritual-subtext {
+  font-family: 'Nosifer', cursive;
+  font-size: 1rem;
+  color: #8b0000;
+  margin-top: 30px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px #ff0000;
+  animation: blood-pulse 4s infinite;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.back-link {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  color: #440000;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: 0.3s;
+}
+
+.back-link:hover {
+  color: #ff4d4d;
+  text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+}
+
+.start-btn {
+  background: #440000;
+  color: #fff;
+  border: none;
+  padding: 15px 40px;
+  font-family: 'Creepster', cursive;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.3s;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.abort-btn-top {
+  background: #440000;
+  border: 1px solid #ff0000;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.abort-btn-top:hover {
+  background: #8b0000;
+}
+
+.reveal-btn {
+  background: transparent;
+  border: 1px solid #440000;
+  color: #8b0000;
+  font-family: 'Creepster', cursive;
+  padding: 5px 15px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.reveal-btn:hover {
+  background: #440000;
+  color: #fff;
+  box-shadow: 0 0 15px #ff0000;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+}
+
+.classic-horror-layout {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.top-horror-text {
+  font-family: 'Creepster', cursive;
+  font-size: 3.5rem;
+  color: #ffffff;
+  letter-spacing: 10px;
+  text-shadow: 0 0 30px #ff0000;
+  animation: blood-pulse 3s infinite;
+}
+
+ais .center-horror-asset {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.horror-hands {
+  width: 350px;
+  filter: drop-shadow(0 0 40px rgba(139, 0, 0, 0.6)) grayscale(1) contrast(1.5);
+  opacity: 0.8;
+  mix-blend-mode: screen;
+}
+
+.horror-hands.active {
+  filter: drop-shadow(0 0 60px #ff0000) sepia(1) hue-rotate(-50deg) saturate(5);
+  opacity: 1;
+  animation: blood-pulse 4s infinite;
+}
+
+.horror-hands.clickable {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.horror-hands.clickable:hover {
+  filter: drop-shadow(0 0 50px rgba(255, 0, 0, 0.4)) grayscale(0.5);
+  transform: scale(1.05) translateY(-30px);
+}
+
+.instruction-text {
+  font-family: 'Creepster', cursive;
+  font-size: 1.2rem;
+  color: #8b0000;
+  letter-spacing: 3px;
+  animation: blood-pulse 3s infinite;
+}
+
+.horror-reveal {
+  animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-hands {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-30px) rotate(2deg);
+  }
+}
+
+.bottom-horror-container {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.bottom-creep-text {
+  font-family: 'Nosifer', cursive;
+  font-size: 1.2rem;
+  color: #ffffff;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px #ff0000;
+}
+
+.sealed-status {
+  animation: flicker 4s infinite;
+}
+
+.horror-video {
+  width: 450px;
+  mix-blend-mode: screen;
+  filter: contrast(1.2) brightness(1.1);
+}
+
+.horror-prompt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+  animation: fadeIn 0.5s ease-out;
+  padding: 20px;
+}
+
+.prompt-text {
+  font-family: 'Nosifer', cursive;
+  font-size: 3rem;
+  color: #ff0000;
+  text-align: center;
+  line-height: 1.5;
+  text-shadow: 0 0 30px #ff0000;
+  animation: blood-pulse 2s infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.wish-info {
+  position: fixed;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
+  z-index: 30;
+  font-family: 'Creepster', cursive;
+  cursor: pointer;
+}
+
+.start-btn:hover {
+  background: #8b0000;
+  box-shadow: 0 0 30px #ff0000;
+}
+
+.glitch-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 0, 0, 0.05);
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+  animation: flash 8s infinite;
+}
+
+@keyframes flash {
+  0%, 98%, 100% { opacity: 0; }
+  99% { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .app-wrapper {
+    padding: 10px;
+  }
+
+  .brand {
+    font-size: 1.2rem;
+  }
+
+  .reveal-btn {
+    padding: 6px 12px;
+    font-size: 0.7rem;
+  }
+
+  .top-horror-text {
+    font-size: 1.5rem;
+    letter-spacing: 10px;
+  }
+
+  .horror-hands {
+    width: 250px;
+  }
+
+  .horror-video {
+    width: 320px;
+  }
+
+  .prompt-text {
+    font-size: 1.8rem;
+  }
+
+  .ritual-subtext {
+    font-size: 1rem;
+  }
+
+  .circular-timer {
+    width: 280px;
+    height: 280px;
+  }
+
+  .timer-text {
+    font-size: 3rem;
+  }
+
+  .wish-input {
+    width: 90%;
+    font-size: 1rem;
+  }
+
+  .start-btn {
+    width: 90%;
+    padding: 15px;
+    font-size: 1.2rem;
+  }
+}
