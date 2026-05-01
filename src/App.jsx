@@ -17,11 +17,11 @@ function App() {
   const videoRef = useRef(null);
   const audioRef = useRef(new Audio('/sound.mpeg'));
   const audioStartTime = 3; // Trim start (seconds)
-  const audioEndTime = 12;  // Trim end (seconds) - ADJUST THIS AS NEEDED
+  const audioEndTime = 14;  // Trim end (seconds) - ADJUST THIS AS NEEDED
 
   useEffect(() => {
     const audio = audioRef.current;
-    
+
     const handleTimeUpdate = () => {
       // If it hits our custom end point, jump back to start
       if (audio.currentTime >= audioEndTime) {
@@ -38,7 +38,7 @@ function App() {
 
     audio.addEventListener('timeupdate', handleTimeUpdate);
     audio.addEventListener('ended', handleEnded);
-    
+
     return () => {
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('ended', handleEnded);
@@ -64,6 +64,13 @@ function App() {
 
   useEffect(() => {
     requestNotificationPermission();
+
+    // Check if user already entered ritual
+    const entered = localStorage.getItem('ritualEntered');
+    if (entered === 'true') {
+      setHasEntered(true);
+    }
+
     const savedWish = localStorage.getItem('activeWish');
     if (savedWish) {
       const parsedWish = JSON.parse(savedWish);
@@ -178,6 +185,11 @@ function App() {
     if (playCount === 1) return "DO NOT LOOK AWAY... THE SECOND SEAL IS WEAKENING.";
     if (playCount === 2) return "THE FINAL SEAL IS OPENING. YOUR SOUL IS BOUND.";
     return "YOUR WISH WILL BE FULFILLED IN 24 HOURS. CLICK REVEAL CLOCK TO WATCH THE FATE.";
+  };
+
+  const handleEnter = () => {
+    setHasEntered(true);
+    localStorage.setItem('ritualEntered', 'true');
   };
 
   if (!hasEntered) {
